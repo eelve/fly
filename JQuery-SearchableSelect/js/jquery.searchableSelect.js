@@ -222,6 +222,7 @@
       var value = item.data('value');
       this.holder.data('value', value);
       this.element.val(value);
+      this.element.trigger('change');
 
       if(this.options.afterSelectItem){
         this.options.afterSelectItem.apply(this);
