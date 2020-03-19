@@ -67,6 +67,6 @@
 
 -------------------------------------------------
 
-演示地址：[https://yyhsong.github.io/iDataV/](https://yyhsong.github.io/iDataV/)
+演示地址：[http://zzlve.win/fly/iDataV/index.html](http://zzlve.win/fly/iDataV/index.html)
 
-项目简介：[https://blog.csdn.net/hwhsong/article/details/80805511](https://blog.csdn.net/hwhsong/article/details/80805511)
+原作者为[yyhsong](https://github.com/yyhsong)，项目地址为：[https://github.com/yyhsong/iDataV](https://github.com/yyhsong/iDataV)。在原作的基础上添加了一个[服务器资源监控](http://zzlve.win/fly/iDataV/case10/index.html)。
