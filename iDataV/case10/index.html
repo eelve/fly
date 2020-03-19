@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>大屏数据可视化</title>
+		<link rel="stylesheet" type="text/css" href="css/app.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css">
+	</head>
+
+	<body>
+		<header id="header">
+			<h3 class="header-title" style="margin: 0">大屏数据可视化</h3>
+
+			<span class="glyphicon glyphicon-cog"  style="position: absolute;right: 1rem;top: 2rem;color: #bef2ff;font-size:2rem;" data-toggle="modal" data-target="#myModal"></span>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">设置</h4>
+						</div>
+						<div class="modal-body">
+							<form>
+								<div class="form-group">
+									<label for="system" class="control-label">请选择业务系统:</label>
+									<select class="selectpicker" id="system" data-live-search="true">
+										<option value="all">所有系统</option>
+										<option value="crm">CRM</option>
+										<option value="bss">BSS</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-primary" id="confirm">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</header>
+
+		<div id="container">
+			<div id="flexCon">
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-l">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">均值/峰值</h3>
+							<div class="chart-div chart-done" id="topLeft">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-c">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">动态数据</h3>
+							<div class="chart-div">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">告警趋势图</h3>
+							<div class="chart-div chart-done" id="topRight">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flex-row">
+					<div class="flex-cell flex-cell-lc">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">资源使用TopN</h3>
+							<div class="chart-div chart-done">
+								<div id="eChart1" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0;" ></div>
+								<div id="eChart2" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
+								<div id="eChart3" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
+								<div id="eChart4" style="width: 25%;height: 100%;float: left;padding: 0 0 0 0.5rem;"></div>
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+					<div class="flex-cell flex-cell-r">
+						<div class="chart-wrapper">
+							<h3 class="chart-title">资源使用趋势图</h3>
+							<div class="chart-div chart-done" id="eChart">
+								<div class="chart-loader"><div class="loader"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- 引入ECharts相关脚本 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				$('#system').selectpicker();
+
+				$('#confirm').click(function () {
+					alert($('#system').val());
+					$('#myModal').modal('hide')
+				})
+
+
+			});
+			/*********** ECharts报表 **********/
+					//初始化图表
+			const topLeft = echarts.init(document.getElementById("topLeft"));
+			const topLeftOpt  = {
+				backgroundColor: '#08254F',
+				legend : {
+					top : '0%',
+					left : '40%',
+					itemWidth : 12,
+					itemHeight : 12,
+					icon : 'horizontal',
+					textStyle : {
+						color : '#ffffff',
+						fontSize : 14,
+					},
+					data: ['均值', '峰值']
+				},
+				// tooltip（提示框组件）
+				tooltip: {
+					//trigger(触发类型)，可选'item','axis','none'
+					trigger: 'axis',
+					axisPointer: {
+						//指示器类型,可选'line','shadow','cross'
+						type: 'shadow'
+					},
+				},
+				//echarts图表的相对于容器的布局,
+				grid: {
+					top: 30,
+					left: 50
+				},
+				xAxis: [{
+					type: 'value',
+					splitLine: {
+						show: true,
+					},
+					//axisTick 坐标轴刻度相关设置
+					axisTick: {
+						show: false
+					},
+					//axixLine 坐标轴轴线相关设置
+					axisLine: {
+						show: false,
+						lineStyle: {
+							color: '#FFFFFF',
+						}
+					},
+					//axisLabel 坐标轴刻度标签的相关设置
+					axisLabel: {
+						show: true,
+					}
+				}, ],
+				yAxis: [{
+					type: 'category',
+					data: ['CPU', '内存', '网络', '磁盘', 'XX','XX'],
+					axisLabel: {
+						show: true,
+						color: '#fff',
+						fontSize: 14,
+					},
+					splitLine: {
+						show: false
+					},
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: '#fff',
+						},
+					},
+					axisTick: {
+						show: false
+					},
+				}, {
+					type: 'category',
+					data: [],
+					axisLabel: {
+						show: false,
+						color: '#fff',
+						fontSize: 14,
+					},
+					splitLine: {
+						show: false
+					},
+					axisLine: {
+						show: true,
+						lineStyle: {
+							color: '#fff',
+						},
+					},
+					axisTick: {
+						show: false
+					},
+				}, ],
+				series: [{
+					name: '均值',
+					type: 'bar',
+					data: [20, 30, 10, 25, 20,20],
+					barWidth: '40%',
+					z: 2,
+					itemStyle: {
+						barBorderRadius: 50,
+						color: 'rgba(81,255,174,1)',
+					},
+				},
+					{
+						name: '峰值',
+						type: 'bar',
+						data: [30, 40, 50, 60, 70,30],
+						barWidth: '40%',
+						// barGap 不同系列的柱间距离
+						barGap: '-100%',
+						z: 1,
+						itemStyle: {
+							//barBorderRadius bar圆角半径
+							barBorderRadius: 50,
+							color: 'rgba(0,191,252,1)',
+						},
+					},
+					{
+
+						type: 'bar',
+						yAxisIndex: 1,
+						data: [100, 100, 100, 100, 100,100],
+						barWidth: '40%',
+						z: 0,
+						itemStyle: {
+							barBorderRadius: 50,
+							color: 'rgba(255,255,255,0.2)',
+						},
+					},
+				]
+			};
+			topLeft.setOption(topLeftOpt);
+
+			const topRight = echarts.init(document.getElementById("topRight"));
+			//图表配置项
+			const topRightOpt  = {
+				title: {
+					text: '',
+					textStyle: {
+						fontWeight: 'normal',
+						fontSize: 16,
+						color: '#F1F1F3'
+					},
+					left: '6%'
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				},
+				legend: {
+					icon: 'rect',
+					itemWidth: 14,
+					itemHeight: 5,
+					itemGap: 13,
+					data: ['告警'],
+					left: '4%',
+					textStyle: {
+						fontSize: 12,
+						color: '#F1F1F3'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7','3.8', '3.9', '3.10','3.11', '3.12', '3.13','3.14']
+				}],
+				yAxis: [{
+					type: 'value',
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					axisLabel: {
+						margin: 10,
+						textStyle: {
+							fontSize: 14
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				}],
+				series: [{
+					name: '告警',
+					type: 'line',
+					smooth: true,
+					lineStyle: {
+						normal: {
+							width: 1
+						}
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(219, 50, 51, 0.3)'
+							}, {
+								offset: 0.8,
+								color: 'rgba(219, 50, 51, 0)'
+							}], false),
+							shadowColor: 'rgba(0, 0, 0, 0.1)',
+							shadowBlur: 10
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: 'rgb(219,50,51)'
+						}
+					},
+					data: [12,10,6,21,7,8,9,8,7,6,9,10,12,10,6,21,7,8,9,8,7,6,9,10]
+				}, ]
+			};
+			topRight.setOption(topRightOpt);
+
+			//渲染topN
+			const eChart = echarts.init(document.getElementById("eChart"));
+			//图表配置项
+			const eOpt  = {
+				title: {
+					text: '',
+					textStyle: {
+						fontWeight: 'normal',
+						fontSize: 16,
+						color: '#F1F1F3'
+					},
+					left: '6%'
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				},
+				legend: {
+					icon: 'rect',
+					itemWidth: 14,
+					itemHeight: 5,
+					itemGap: 13,
+					data: ['CPU利用率(%)', '内存利用率(%)', '磁盘利用率(%)'],
+					right: '4%',
+					textStyle: {
+						fontSize: 12,
+						color: '#F1F1F3'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7']
+				}],
+				yAxis: [{
+					type: 'value',
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					axisLabel: {
+						margin: 10,
+						textStyle: {
+							fontSize: 14
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				}],
+				series: [{
+					name: 'CPU利用率(%)',
+					type: 'line',
+					smooth: true,
+					lineStyle: {
+						normal: {
+							width: 1
+						}
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(137, 189, 27, 0.3)'
+							}, {
+								offset: 0.8,
+								color: 'rgba(137, 189, 27, 0)'
+							}], false),
+							shadowColor: 'rgba(0, 0, 0, 0.1)',
+							shadowBlur: 10
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: 'rgb(137,189,27)'
+						}
+					},
+					data: [96.3,96.4,97.5,95.6,98.1,94.8,89.6,94.1,80.1,52.4,75.8,94.7]
+				}, {
+					name: '内存利用率(%)',
+					type: 'line',
+					smooth: true,
+					lineStyle: {
+						normal: {
+							width: 1
+						}
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(0, 136, 212, 0.3)'
+							}, {
+								offset: 0.8,
+								color: 'rgba(0, 136, 212, 0)'
+							}], false),
+							shadowColor: 'rgba(0, 0, 0, 0.1)',
+							shadowBlur: 10
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: 'rgb(0,136,212)'
+						}
+					},
+					data: [97.3,99.2,99.3,100.0,99.6,90.6,80.0,91.5,69.8,67.5,90.4,84.9]
+				}, {
+					name: '磁盘利用率(%)',
+					type: 'line',
+					smooth: true,
+					lineStyle: {
+						normal: {
+							width: 1
+						}
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(219, 50, 51, 0.3)'
+							}, {
+								offset: 0.8,
+								color: 'rgba(219, 50, 51, 0)'
+							}], false),
+							shadowColor: 'rgba(0, 0, 0, 0.1)',
+							shadowBlur: 10
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: 'rgb(219,50,51)'
+						}
+					},
+					data: [84.2,81.0,67.5,72.1,43.7,88.5,91.9,91.8,79.7,87.6,92.9,0]
+				}, ]
+			};
+			const eOpt2  = {
+				title: {
+					text: '',
+					textStyle: {
+						fontWeight: 'normal',
+						fontSize: 16,
+						color: '#F1F1F3'
+					},
+					left: '6%'
+				},
+				tooltip: {
+					trigger: 'axis',
+					axisPointer: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				},
+				legend: {
+					icon: 'rect',
+					itemWidth: 14,
+					itemHeight: 5,
+					itemGap: 13,
+					data: ['网络延时(ms)'],
+					left: '4%',
+					textStyle: {
+						fontSize: 12,
+						color: '#F1F1F3'
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					bottom: '3%',
+					containLabel: true
+				},
+				xAxis: [{
+					type: 'category',
+					boundaryGap: false,
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7']
+				}],
+				yAxis: [{
+					type: 'value',
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					},
+					axisLabel: {
+						margin: 10,
+						textStyle: {
+							fontSize: 14
+						}
+					},
+					splitLine: {
+						lineStyle: {
+							color: '#57617B'
+						}
+					}
+				}],
+				series: [{
+					name: '网络延时(ms)',
+					type: 'line',
+					smooth: true,
+					lineStyle: {
+						normal: {
+							width: 1
+						}
+					},
+					areaStyle: {
+						normal: {
+							color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+								offset: 0,
+								color: 'rgba(137, 189, 27, 0.3)'
+							}, {
+								offset: 0.8,
+								color: 'rgba(137, 189, 27, 0)'
+							}], false),
+							shadowColor: 'rgba(0, 0, 0, 0.1)',
+							shadowBlur: 10
+						}
+					},
+					itemStyle: {
+						normal: {
+							color: 'rgb(137,189,27)'
+						}
+					},
+					data: [110,119,97,56,81,48,86,41,81,54,78,47]
+				} ]
+			};
+			//渲染图表
+			eChart.setOption(eOpt);
+			var flag = false;
+
+			setInterval(function () {
+				if(flag){
+					eChart.clear();
+					eChart.setOption(eOpt);
+					flag = false;
+				}else {
+					eChart.clear();
+					eChart.setOption(eOpt2);
+					flag = true;
+				}
+				console.log('interval')
+			}, 10000);
+
+
+			const eChart1 = echarts.init(document.getElementById("eChart1"));
+			const eChart2 = echarts.init(document.getElementById("eChart2"));
+			const eChart3 = echarts.init(document.getElementById("eChart3"));
+			const eChart4 = echarts.init(document.getElementById("eChart4"));
+
+			const colorArray = [
+				{
+					top: '#ffa800', //黄
+					bottom: 'rgba(11,42,84,.3)'
+				}, {
+					top: '#1ace4a', //绿
+					bottom: 'rgba(11,42,84, 0.3)'
+				},
+				{
+					top: '#4bf3ff', //蓝
+					bottom: 'rgba(11,42,84,.3)'
+				}, {
+					top: '#4f9aff', //深蓝
+					bottom: 'rgba(11,42,84,.3)'
+				},
+				{
+					top: '#b250ff', //粉
+					bottom: 'rgba(11,42,84,.3)'
+				}
+			];
+			const option2 = {
+				backgroundColor: 'rgba(128, 128, 128, 0.1)',
+				title: {
+					text: 'TopN',
+					textStyle: {
+						fontWeight: 'normal',
+						fontSize: 16,
+						color: '#F1F1F3'
+					},
+					left: '40%',
+					top: '2%'
+				},
+				tooltip: {
+					show: true,
+					formatter: "{b}:{c}"
+				},
+				grid: {
+					left: '5%',
+					top: '12%',
+					right: '2%',
+					bottom: '8%',
+					containLabel: true
+				},
+
+				xAxis: {
+					type: 'value',
+					show:false,
+					position: 'top',
+					axisTick: {
+						show: false
+					},
+					axisLine: {
+						show: false,
+						lineStyle: {
+							color: '#fff',
+						}
+					},
+					splitLine: {
+						show: false
+					},
+				},
+				yAxis: [{
+					type: 'category',
+					axisTick: {
+						show: false,
+						alignWithLabel: false,
+						length: 5,
+
+					},
+					"splitLine": { //网格线
+						"show": false
+					},
+					inverse: 'true', //排序
+					axisLine: {
+						show: false,
+						lineStyle: {
+							color: '#fff',
+						}
+					},
+					data: ['first', 'two', 'three', 'four', 'five','six', 'seven', 'eight', 'nine', 'ten']
+				}
+
+				],
+				series: [{
+					name: '排行榜',
+					type: 'bar',
+					label: {
+						normal: {
+							show: true,
+							position: 'right',
+							formatter: '{c}',
+							textStyle: {
+								color: 'white' //color of value
+							}
+						}
+					},
+					itemStyle: {
+						normal: {
+							show: true,
+							color: function(params) {
+								let num = colorArray.length;
+								return {
+									type: 'linear',
+									colorStops: [{
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}, {
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}, {
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}, {
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}, {
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}, {
+										offset: 0,
+										color: colorArray[params.dataIndex % num].bottom
+									}, {
+										offset: 1,
+										color: colorArray[params.dataIndex % num].top
+									}],
+									//globalCoord: false
+								}
+							},
+							barBorderRadius: 70,
+							borderWidth: 0,
+							borderColor: '#333',
+						}
+					},
+					barGap: '0%',
+					barCategoryGap: '50%',
+					data: [132, 108, 100, 98, 80,72, 68, 60, 48, 38]
+				}
+
+				]
+			};
+			eChart1.setOption(option2);
+			eChart2.setOption(option2);
+			eChart3.setOption(option2);
+			eChart4.setOption(option2);
+
+			//添加自适应效果
+			window.onresize = function(){
+				eChart.resize();
+				eChart1.resize();
+				eChart2.resize();
+				eChart3.resize();
+				eChart4.resize();
+				topRight.resize();
+			}
+		</script>
+	</body>
+</html>
