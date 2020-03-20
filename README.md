@@ -41,7 +41,7 @@ jquery.searchableSelect实现的下拉搜索组件，修复了change事件：
     }
 ```
 
-在源代码的基础上添加了绑定事件，出发**change**事件
+在源代码的基础上添加了绑定事件，触发**change**事件
 
 ```
 this.element.trigger('change');
