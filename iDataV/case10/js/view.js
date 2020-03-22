@@ -660,7 +660,6 @@ function downRigthView() {
     downRigth.setOption(downRigthOpt);
     var flag = false;
     timer = setInterval(function () {
-        console.log('interval--->timer--->' + timer)
         if(flag){
             downRigth.clear();
             downRigth.setOption(downRigthOpt);
