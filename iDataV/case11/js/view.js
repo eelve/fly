@@ -32,14 +32,21 @@ function topLeftView() {
         legend : {
             top : '0%',
             left : '40%',
-            itemWidth : 12,
-            itemHeight : 12,
+            itemWidth : 14,
+            itemHeight : 5,
             icon : 'horizontal',
             textStyle : {
-                color : '#ffffff',
+                color : '#F1F1F3',
                 fontSize : 14,
             },
             data: ['均值', '峰值']
+        },
+        grid: {
+            left: '5%',
+            top: '12%',
+            right: '4%',
+            bottom: '8%',
+            containLabel: true
         },
         // tooltip（提示框组件）
         tooltip: {
@@ -68,7 +75,7 @@ function topLeftView() {
             axisLine: {
                 show: false,
                 lineStyle: {
-                    color: '#FFFFFF',
+                    color: '#57617B',
                 }
             },
             //axisLabel 坐标轴刻度标签的相关设置
@@ -81,7 +88,7 @@ function topLeftView() {
             data: ['CPU', '内存', '网络', '磁盘', 'XX','XX'],
             axisLabel: {
                 show: true,
-                color: '#fff',
+                color: '#57617B',
                 fontSize: 14,
             },
             splitLine: {
@@ -90,7 +97,7 @@ function topLeftView() {
             axisLine: {
                 show: true,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#57617B',
                 },
             },
             axisTick: {
@@ -101,7 +108,7 @@ function topLeftView() {
             data: [],
             axisLabel: {
                 show: false,
-                color: '#fff',
+                color: '#57617B',
                 fontSize: 14,
             },
             splitLine: {
@@ -110,7 +117,7 @@ function topLeftView() {
             axisLine: {
                 show: true,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#57617B',
                 },
             },
             axisTick: {
@@ -121,25 +128,25 @@ function topLeftView() {
             name: '均值',
             type: 'bar',
             data: [20, 30, 10, 25, 20,20],
-            barWidth: '40%',
+            barWidth: '30%',
             z: 2,
             itemStyle: {
                 barBorderRadius: 50,
-                color: 'rgba(81,255,174,1)',
+                color: 'rgba(81,255,174,0.5)',
             },
         },
             {
                 name: '峰值',
                 type: 'bar',
                 data: [30, 40, 50, 60, 70,30],
-                barWidth: '40%',
+                barWidth: '30%',
                 // barGap 不同系列的柱间距离
                 barGap: '-100%',
                 z: 1,
                 itemStyle: {
                     //barBorderRadius bar圆角半径
                     barBorderRadius: 50,
-                    color: 'rgba(0,191,252,1)',
+                    color: 'rgba(0,191,252,0.5)',
                 },
             },
             {
@@ -162,10 +169,10 @@ function topLeftView() {
 function topCenterView() {
     rollNum("1", 0, 11);
     rollNum("2", 0, 13);
-    rollNum("3", 0, 12, 2);
-    rollNum("4", 0, 10, 2);
-    rollNum("5", 0, 2, 2);
-    rollNum("6", 0, 3, 2);
+    rollNum("3", 0, 12);
+    rollNum("4", 0, 10);
+    rollNum("5", 0, 2);
+    rollNum("6", 0, 3);
     rollNum("7", 0, 12);
     rollNum("8", 0, 3);
     rollNum("9", 0, 12);
@@ -200,14 +207,20 @@ function topRightView() {
             itemWidth: 14,
             itemHeight: 5,
             itemGap: 13,
-            data: ['告警'],
+            data: ['告警未恢复','告警'],
             left: '4%',
             textStyle: {
                 fontSize: 12,
                 color: '#F1F1F3'
             }
         },
-
+        grid: {
+            left: '5%',
+            top: '12%',
+            right: '2%',
+            bottom: '8%',
+            containLabel: true
+        },
         xAxis: [{
             type: 'category',
             boundaryGap: false,
@@ -241,6 +254,34 @@ function topRightView() {
             }
         }],
         series: [{
+            name: '告警未恢复',
+            type: 'line',
+            smooth: true,
+            lineStyle: {
+                normal: {
+                    width: 1
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(137, 189, 27, 0.3)'
+                    }, {
+                        offset: 0.8,
+                        color: 'rgba(137, 189, 27, 0)'
+                    }], false),
+                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                    shadowBlur: 10
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: 'rgb(219,50,51)'
+                }
+            },
+            data: [10,1,6,3,2,3,3,3,3,2,2,1,11,9,5,17,3,3,9,7,2,4,8,9]
+        },{
             name: '告警',
             type: 'line',
             smooth: true,
@@ -264,7 +305,7 @@ function topRightView() {
             },
             itemStyle: {
                 normal: {
-                    color: 'rgb(219,50,51)'
+                    color: 'rgb(219,153,30)'
                 }
             },
             data: [12,10,6,21,7,8,9,8,7,6,9,10,12,10,6,21,7,8,9,8,7,6,9,10]
@@ -304,6 +345,13 @@ function downRigthView() {
                 fontSize: 12,
                 color: '#F1F1F3'
             }
+        },
+        grid: {
+            left: '5%',
+            top: '12%',
+            right: '4%',
+            bottom: '8%',
+            containLabel: true
         },
         xAxis: [{
             type: 'category',
@@ -454,9 +502,10 @@ function downRigthView() {
             }
         },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
+            left: '5%',
+            top: '12%',
+            right: '2%',
+            bottom: '8%',
             containLabel: true
         },
         xAxis: [{
@@ -593,7 +642,7 @@ function downLeftView() {
             axisLine: {
                 show: false,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#57617B',
                 }
             },
             splitLine: {
@@ -615,7 +664,7 @@ function downLeftView() {
             axisLine: {
                 show: false,
                 lineStyle: {
-                    color: '#fff',
+                    color: '#57617B',
                 }
             },
             data: ['first', 'two', 'three', 'four', 'five','six', 'seven', 'eight', 'nine', 'ten']
@@ -711,12 +760,12 @@ function dataView(){
 
 //添加自适应效果
 window.onresize = function(){
-     topLeft.resize();
-     //topCenter.resize();
-     topRight.resize();
-     downRigth.resize();
-     downLeft1.resize();
-     downLeft2.resize();
-     downLeft3.resize();
-     downLeft4.resize();
+    topLeft.resize();
+    //topCenter.resize();
+    topRight.resize();
+    downRigth.resize();
+    downLeft1.resize();
+    downLeft2.resize();
+    downLeft3.resize();
+    downLeft4.resize();
 }
