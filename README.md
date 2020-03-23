@@ -13,7 +13,7 @@ bootstrap-select实现的demo。
 
 数据可视化模板，主要利用ECharts实现，另外还可以通过第三方服务来快速实现，如阿里云DataV、腾讯云图、百度Sugar等。
 
-本模块包含10个case和4个基础模板。 
+本模块包含18个案例。 
 
 ## [JQuery-SearchableSelect](JQuery-SearchableSelect/index.html)
 
