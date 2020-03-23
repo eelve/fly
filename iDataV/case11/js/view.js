@@ -56,6 +56,9 @@ function topLeftView() {
             type: 'value',
             splitLine: {
                 show: true,
+                lineStyle: {
+                    color: '#57617B'
+                }
             },
             //axisTick 坐标轴刻度相关设置
             axisTick: {
