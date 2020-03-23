@@ -81,6 +81,8 @@ function topLeftView() {
             //axisLabel 坐标轴刻度标签的相关设置
             axisLabel: {
                 show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
             }
         }, ],
         yAxis: [{
@@ -88,7 +90,7 @@ function topLeftView() {
             data: ['CPU', '内存', '网络', '磁盘', 'XX','XX'],
             axisLabel: {
                 show: true,
-                color: '#57617B',
+                color: '#F1F1F3',
                 fontSize: 14,
             },
             splitLine: {
@@ -107,8 +109,8 @@ function topLeftView() {
             type: 'category',
             data: [],
             axisLabel: {
-                show: false,
-                color: '#57617B',
+                show: true,
+                color: '#F1F1F3',
                 fontSize: 14,
             },
             splitLine: {
@@ -229,6 +231,11 @@ function topRightView() {
                     color: '#57617B'
                 }
             },
+            axisLabel: {
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
+            },
             data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7','3.8', '3.9', '3.10','3.11', '3.12', '3.13','3.14']
         }],
         yAxis: [{
@@ -242,10 +249,9 @@ function topRightView() {
                 }
             },
             axisLabel: {
-                margin: 10,
-                textStyle: {
-                    fontSize: 14
-                }
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
             },
             splitLine: {
                 lineStyle: {
@@ -361,6 +367,11 @@ function downRigthView() {
                     color: '#57617B'
                 }
             },
+            axisLabel: {
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
+            },
             data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7']
         }],
         yAxis: [{
@@ -374,10 +385,9 @@ function downRigthView() {
                 }
             },
             axisLabel: {
-                margin: 10,
-                textStyle: {
-                    fontSize: 14
-                }
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
             },
             splitLine: {
                 lineStyle: {
@@ -516,6 +526,11 @@ function downRigthView() {
                     color: '#57617B'
                 }
             },
+            axisLabel: {
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
+            },
             data: ['3.1', '3.2', '3.3','3.4', '3.5', '3.6','3.7']
         }],
         yAxis: [{
@@ -529,10 +544,9 @@ function downRigthView() {
                 }
             },
             axisLabel: {
-                margin: 10,
-                textStyle: {
-                    fontSize: 14
-                }
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
             },
             splitLine: {
                 lineStyle: {
@@ -626,7 +640,7 @@ function downLeftView() {
         },
         grid: {
             left: '5%',
-            top: '12%',
+            top: '8%',
             right: '2%',
             bottom: '8%',
             containLabel: true
@@ -666,6 +680,11 @@ function downLeftView() {
                 lineStyle: {
                     color: '#57617B',
                 }
+            },
+            axisLabel: {
+                show: true,
+                color: '#F1F1F3',
+                fontSize: 14,
             },
             data: ['first', 'two', 'three', 'four', 'five','six', 'seven', 'eight', 'nine', 'ten']
         }
