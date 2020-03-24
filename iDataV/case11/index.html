@@ -1,206 +1,226 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>服务器资源监控2</title>
-		<link rel="stylesheet" type="text/css" href="css/app.css" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css">
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>服务器资源监控2</title>
+	<link rel="stylesheet" type="text/css" href="css/app.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css">
+</head>
 
-	<body>
-		<header id="header">
-			<h3 class="header-title" style="margin: 0">服务器资源监控2</h3>
+<body>
+<header id="header">
+	<h3 class="header-title" style="margin: 0">服务器资源监控2</h3>
 
-			<span class="glyphicon glyphicon-cog"  style="position: absolute;right: 1rem;top: 2rem;color: #bef2ff;font-size:2rem;" data-toggle="modal" data-target="#myModal"></span>
+	<span class="glyphicon glyphicon-cog"  style="position: absolute;right: 1rem;top: 2rem;color: #bef2ff;font-size:2rem;" data-toggle="modal" data-target="#myModal"></span>
 
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">设置</h4>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">设置</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="system" class="control-label col-sm-4">业务系统:</label>
+						<select class="selectpicker col-sm-8" id="system" data-live-search="true">
+							<option value="all">所有系统</option>
+							<option value="crm">CRM</option>
+							<option value="bss">BSS</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4">开始时间:</label>
+						<div class="input-group date startDate col-sm-8">
+							<input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="system" class="control-label col-sm-4">业务系统:</label>
-								<select class="selectpicker col-sm-8" id="system" data-live-search="true">
-									<option value="all">所有系统</option>
-									<option value="crm">CRM</option>
-									<option value="bss">BSS</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="control-label  col-sm-4">开始日期：</label>
-								<!--指定 date标记-->
-								<div class='input-group date col-sm-8' id='datetimepicker1'>
-									<input type='text' class="form-control" />
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									 </span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label  col-sm-4">结束日期：</label>
-								<!--指定 date标记-->
-								<div class='input-group date col-sm-8' id='datetimepicker2'>
-									<input type='text' class="form-control" />
-									<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
-										 </span>
-								</div>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4">结束时间:</label>
+						<div class="input-group date endDate col-sm-8">
+							<input type="text" class="form-control"><span class="input-group-addon"></i><i class="glyphicon glyphicon-th"></i></span>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary" id="confirm">确定</button>
-						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="confirm">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</header>
+
+<div id="container">
+	<div id="flexCon">
+		<div class="flex-row">
+			<div class="flex-cell flex-cell-l">
+				<div class="chart-wrapper">
+					<h3 class="chart-title">均值/峰值</h3>
+					<div class="chart-div" id="topLeft">
+						<div class="chart-loader"><div class="loader"></div></div>
 					</div>
 				</div>
 			</div>
-
-		</header>
-
-		<div id="container">
-			<div id="flexCon">
-				<div class="flex-row">
-					<div class="flex-cell flex-cell-l">
-						<div class="chart-wrapper">
-							<h3 class="chart-title">均值/峰值</h3>
-							<div class="chart-div" id="topLeft">
-								<div class="chart-loader"><div class="loader"></div></div>
-							</div>
-						</div>
-					</div>
-					<div class="flex-cell flex-cell-c">
-						<div class="chart-wrapper">
-							<h3 class="chart-title">动态数据</h3>
-							<div class="chart-div">
-								<table class="data-t">
-									<tr>
-										<td>主机数</td>
-										<td>虚拟机</td>
-										<td>告警数</td>
-										<td>告警未恢复</td>
-									</tr>
-									<tr>
-										<td><span id="1">0</span><span class="glyphicon glyphicon-arrow-up up">1</span></td>
-										<td><span id="2">0</span><span class="glyphicon glyphicon-arrow-up up">2</span></td>
-										<td><span id="3">0</span><span class="glyphicon glyphicon-arrow-up up">3.0</span></td>
-										<td><span id="4">0</span><span class="glyphicon glyphicon-arrow-up up">2</span></td>
-									</tr>
-									<tr>
-										<td>主机数</td>
-										<td>虚拟机</td>
-										<td>告警数</td>
-										<td>告警未恢复</td>
-									</tr>
-									<tr>
-										<td><span id="5">0</span><span class="glyphicon glyphicon-arrow-down down">1</span></td>
-										<td><span id="6">0</span><span class="glyphicon glyphicon-arrow-down down">2</span></td>
-										<td><span id="7">0</span><span class="glyphicon glyphicon-arrow-down down">3</span></td>
-										<td><span id="8">0</span><span class="glyphicon glyphicon-arrow-down down">4</span></td>
-									</tr>
-									<tr>
-										<td>主机数</td>
-										<td>虚拟机</td>
-										<td>告警数</td>
-										<td>告警未恢复</td>
-									</tr>
-									<tr>
-										<td><span id="9">0</span><span class="glyphicon glyphicon-arrow-down down">1</span></td>
-										<td><span id="10">0</span><span class="glyphicon glyphicon-arrow-down down">2</span></td>
-										<td><span id="11">0</span><span class="glyphicon glyphicon-arrow-down down">3</span></td>
-										<td><span id="12">0</span><span class="glyphicon glyphicon-arrow-down down">4</span></td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="flex-cell flex-cell-r">
-						<div class="chart-wrapper">
-							<h3 class="chart-title">告警趋势图</h3>
-							<div class="chart-div" id="topRight">
-								<div class="chart-loader"><div class="loader"></div></div>
-							</div>
-						</div>
+			<div class="flex-cell flex-cell-c">
+				<div class="chart-wrapper">
+					<h3 class="chart-title">动态数据</h3>
+					<div class="chart-div">
+						<table class="data-t">
+							<tr>
+								<td>主机数</td>
+								<td>虚拟机</td>
+								<td>告警数</td>
+								<td>告警未恢复</td>
+							</tr>
+							<tr>
+								<td><span id="1">0</span><span class="glyphicon glyphicon-arrow-up up">1</span></td>
+								<td><span id="2">0</span><span class="glyphicon glyphicon-arrow-up up">2</span></td>
+								<td><span id="3">0</span><span class="glyphicon glyphicon-arrow-up up">3.0</span></td>
+								<td><span id="4">0</span><span class="glyphicon glyphicon-arrow-up up">2</span></td>
+							</tr>
+							<tr>
+								<td>主机数</td>
+								<td>虚拟机</td>
+								<td>告警数</td>
+								<td>告警未恢复</td>
+							</tr>
+							<tr>
+								<td><span id="5">0</span><span class="glyphicon glyphicon-arrow-down down">1</span></td>
+								<td><span id="6">0</span><span class="glyphicon glyphicon-arrow-down down">2</span></td>
+								<td><span id="7">0</span><span class="glyphicon glyphicon-arrow-down down">3</span></td>
+								<td><span id="8">0</span><span class="glyphicon glyphicon-arrow-down down">4</span></td>
+							</tr>
+							<tr>
+								<td>主机数</td>
+								<td>虚拟机</td>
+								<td>告警数</td>
+								<td>告警未恢复</td>
+							</tr>
+							<tr>
+								<td><span id="9">0</span><span class="glyphicon glyphicon-arrow-down down">1</span></td>
+								<td><span id="10">0</span><span class="glyphicon glyphicon-arrow-down down">2</span></td>
+								<td><span id="11">0</span><span class="glyphicon glyphicon-arrow-down down">3</span></td>
+								<td><span id="12">0</span><span class="glyphicon glyphicon-arrow-down down">4</span></td>
+							</tr>
+						</table>
 					</div>
 				</div>
-				<div class="flex-row">
-					<div class="flex-cell flex-cell-lc">
-						<div class="chart-wrapper">
-							<h3 class="chart-title">资源使用TopN</h3>
-							<div class="chart-div">
-								<div id="downLeft1" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0;" ><div class="chart-loader"><div class="loader"></div></div></div>
-								<div id="downLeft2" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
-								<div id="downLeft3" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
-								<div id="downLeft4" style="width: 25%;height: 100%;float: left;padding: 0 0 0 0.5rem;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="flex-cell flex-cell-r">
-						<div class="chart-wrapper">
-							<h3 class="chart-title">资源使用趋势图</h3>
-							<div class="chart-div" id="downRigth">
-								<div class="chart-loader"><div class="loader"></div></div>
-							</div>
-						</div>
+			</div>
+			<div class="flex-cell flex-cell-r">
+				<div class="chart-wrapper">
+					<h3 class="chart-title">告警趋势图</h3>
+					<div class="chart-div" id="topRight">
+						<div class="chart-loader"><div class="loader"></div></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
-		<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
-		<script type="text/javascript" src="js/countUp.min.js"></script>
-		<script src="js/view.js"></script>
-		<script type="text/javascript">
-			$(function () {
-				dataView();
-				$('#system').selectpicker();
+		<div class="flex-row">
+			<div class="flex-cell flex-cell-lc">
+				<div class="chart-wrapper">
+					<h3 class="chart-title">资源使用TopN</h3>
+					<div class="chart-div">
+						<div id="downLeft1" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0;" ><div class="chart-loader"><div class="loader"></div></div></div>
+						<div id="downLeft2" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
+						<div id="downLeft3" style="width: 25%;height: 100%;float: left;padding: 0 0.5rem 0 0.5rem;"></div>
+						<div id="downLeft4" style="width: 25%;height: 100%;float: left;padding: 0 0 0 0.5rem;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="flex-cell flex-cell-r">
+				<div class="chart-wrapper">
+					<h3 class="chart-title">资源使用趋势图</h3>
+					<div class="chart-div" id="downRigth">
+						<div class="chart-loader"><div class="loader"></div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script type="text/javascript" src="js/countUp.min.js"></script>
+<script src="js/view.js"></script>
+<script type="text/javascript">
+	$(function () {
+		dataView();
+		$('#system').selectpicker();
 
-				$('#datetimepicker1').datetimepicker({
-					format: 'YYYY-MM-DD',
-					locale: moment.locale('zh-cn')
-				});
+		$('.startDate').datepicker({
+			endDate: new Date(),
+			maxViewMode: 0,
+			language: "zh-CN",
+			todayBtn: "linked",
+			clearBtn: true,
+			autoclose: true,
+			todayHighlight: true
+		});
 
-				$('#datetimepicker2').datetimepicker({
-					format: 'YYYY-MM-DD',
-					locale: moment.locale('zh-cn')
-				});
+		$('.endDate').datepicker({
+			endDate: new Date(),
+			maxViewMode: 0,
+			language: "zh-CN",
+			todayBtn: "linked",
+			clearBtn: true,
+			autoclose: true,
+			todayHighlight: true
+		});
 
-				$('#confirm').click(function () {
-					console.log($('#system').val());
-					var startDate = $('#datetimepicker1').find("input").val();
-					var endDate = $('#datetimepicker2').find("input").val();
+		//设置开始时间必须早于结束时间
+		$(".startDate").datepicker().on('changeDate', function(e) {
+			//获取选取的开始时间
+			var startDate = $('.startDate').find("input").val();
+			//设置结束时间
+			$('.endDate').datepicker('setStartDate', startDate);
+		});
 
-					if(startDate === '' || startDate === null || startDate === undefined){
-						alert("开始时间不能为空");
-					}else if(endDate === ''|| endDate === null || endDate === undefined){
-						alert("结束时间不能为空");
-					}else{
-						var formatDate1 = new Date(startDate);
-						var formatDate2 = new Date(endDate);
-						if(formatDate1 > formatDate2){
-							alert("开始时间不能大于结束时间");
-						}else{
-							dataView();
-							$('#myModal').modal('hide');
-						}
-					}
-				})
+		//设置结束时间必须晚于开始时间
+		$(".endDate").datepicker().on('changeDate', function(e) {
+			//获取选取的开始时间
+			var endDate = $('.endDate').find("input").val();
+			//设置结束时间
+			$('.startDate').datepicker('setEndDate', endDate);
+		});
 
 
-				setInterval(function () {
+
+		$('#confirm').click(function () {
+			var startDate = $('.startDate').find("input").val();
+			var endDate = $('.endDate').find("input").val();
+			console.log($('#system').val() + "---startDate:"+ startDate +"---endDate:" + endDate);
+			if(startDate === '' || startDate === null || startDate === undefined){
+				alert("开始时间不能为空");
+			}else if(endDate === ''|| endDate === null || endDate === undefined){
+				alert("结束时间不能为空");
+			}else{
+				var formatDate1 = new Date(startDate);
+				var formatDate2 = new Date(endDate);
+				if(formatDate1 > formatDate2){
+					alert("开始时间不能大于结束时间");
+				}else{
 					dataView();
-				}, 60000);
-			});
-		</script>
-	</body>
+					$('#myModal').modal('hide');
+				}
+			}
+		})
+
+
+		setInterval(function () {
+			topCenterView();
+		}, 60000);
+	});
+</script>
+</body>
 </html>
