@@ -46,3 +46,7 @@ jquery.searchableSelect实现的下拉搜索组件，修复了change事件：
 ```
 this.element.trigger('change');
 ```
+
+## [Bootstrap3Nav](Bootstrap3Nav/index.html)
+
+漂亮优雅的Bootstrap侧边栏导航
