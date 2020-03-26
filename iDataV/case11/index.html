@@ -13,6 +13,22 @@
 
 <body>
 <header id="header">
+
+	<div id="mobile-menu" class="mobile-nav hide-nav">
+		<ul>
+			<li><a href="#">大屏展示</a></li>
+			<li><a href="#">短信配置</a></li>
+			<li><a href="#">报表导出</a></li>
+		</ul>
+	</div>
+
+
+	<div class="nav-btn">
+		<a href="#" class="mobile-nav-taggle" id="mobile-nav-taggle">
+			<span class="glyphicon glyphicon-align-justify"></span>
+		</a>
+	</div>
+
 	<h3 class="header-title" style="margin: 0">服务器资源监控1</h3>
 
 	<span class="glyphicon glyphicon-cog"  style="position: absolute;right: 1rem;top: 2rem;color: #bef2ff;font-size:2rem;" data-toggle="modal" data-target="#myModal"></span>
@@ -155,6 +171,34 @@
 <script src="js/view.js"></script>
 <script type="text/javascript">
 	$(function () {
+
+		$("#mobile-nav-taggle").click(function () {
+			var mobileMenu = $("#mobile-menu");
+			if (mobileMenu.hasClass("hide-nav")) {
+				setTimeout(function () {
+					mobileMenu.addClass("show-nav").removeClass("hide-nav");
+				}, 100)
+			}
+			else {
+				setTimeout(function (){
+					mobileMenu.addClass("hide-nav").removeClass("show-nav");
+				}, 100)
+			}
+		});
+		$("#mobile-menu").click(function () {
+			var mobileMenu = $("#mobile-menu");
+			if (mobileMenu.hasClass("hide-nav")) {
+				setTimeout(function () {
+					mobileMenu.addClass("show-nav").removeClass("hide-nav");
+				}, 100)
+			}
+			else {
+				setTimeout(function (){
+					mobileMenu.addClass("hide-nav").removeClass("show-nav");
+				}, 100)
+			}
+		});
+
 		dataView();
 		$('#system').selectpicker();
 

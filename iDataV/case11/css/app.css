@@ -153,3 +153,12 @@ body {
 .data-t span {margin:5px 0;font-size:18px;font-weight:bold;color:#b0c2f9;}
 .data-t .up {color: #ff0428;font-size:12px;}
 .data-t .down {color: #bef2ff;font-size:12px;}
+
+
+#mobile-menu {position:fixed;top:0;right:0;width:220px;height:100%;background-color:#373737;z-index:9999;transition:all 0.5s ease-in;}
+a:hover ,a:focus{text-decoration:none}
+.mobile-nav ul li a {color:gray;display:block;padding:1em 5%;border-top:1px solid #4f4f4f;border-bottom:1px solid #292929;transition:all 0.2s ease-out;cursor:pointer;}
+.mobile-nav ul li a:hover {background-color: #23A1F6;color: #ffffff;}
+.show-nav {transform:translateX(0);}
+.hide-nav {transform:translateX(220px);} /*侧滑关键*/
+.nav-btn span{position: absolute;right: 4rem;top: 2rem;color: #bef2ff;font-size:2rem;}
