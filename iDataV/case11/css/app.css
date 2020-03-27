@@ -161,4 +161,4 @@ a:hover ,a:focus{text-decoration:none}
 .mobile-nav ul li a:hover {background-color: #23A1F6;color: #ffffff;}
 .show-nav {transform:translateX(0);}
 .hide-nav {transform:translateX(220px);} /*侧滑关键*/
-.nav-btn span{position: absolute;right: 4rem;top: 2rem;color: #bef2ff;font-size:2rem;}
+.nav-btn span{position: absolute;right: 3rem;top: 1rem;color: #bef2ff;font-size:1rem;}
