@@ -50,3 +50,6 @@ this.element.trigger('change');
 ## [Bootstrap3Nav](Bootstrap3Nav/index.html)
 
 漂亮优雅的Bootstrap侧边栏导航
+
+# License
+Released under the [MIT](LICENSE) License.
