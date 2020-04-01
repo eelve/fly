@@ -51,5 +51,9 @@ this.element.trigger('change');
 
 漂亮优雅的Bootstrap侧边栏导航
 
+## [tablesMergeCell](tablesMergeCell/index.html)
+
+动态表格合并案例
+
 # License
 Released under the [MIT](LICENSE) License.
