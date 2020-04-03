@@ -1,0 +1,221 @@
+<html >
+<head>
+    <meta charset="utf-8" />
+    <title>页面打印</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+    <style type="text/css">
+        table,tr,td{
+            text-align: center;
+            border: solid 2px rgba(99, 108, 130, 0.87);
+        }
+        .header td{
+            height: 7rem;
+        }
+    </style>
+</head>
+<body id="print">
+    <div class="form-group">
+        <label for="system" class="control-label">业务系统:</label>
+        <select class="selectpicker" id="system" data-live-search="true">
+            <option value="all">所有系统</option>
+            <option value="crm">CRM</option>
+            <option value="bss">BSS</option>
+        </select>
+        <button type="button" class="btn btn-primary" id="confirm">确定</button>
+        <button type="button" class="btn btn-primary"  onclick="print()">打印</button>
+    </div>
+    <table>
+        <tr class="header">
+            <td style="font-weight: bold">业务系统</td>
+            <td style="font-weight: bold">服务器数量(台)</td>
+            <td style="font-weight: bold" colspan="2">物理机/虚拟机</td>
+            <td style="font-weight: bold" colspan="2">系统划分</td>
+        </tr>
+        <tr>
+            <td rowspan="10" class="col-md-4">
+                <div id="pie" style="width: 100%;height: 600px;"></div>
+            </td>
+            <td rowspan="8" style="vertical-align:middle;" class="col-md-1">90</td>
+            <td rowspan="4" style="vertical-align:middle;" class="col-md-1">物理机</td>
+            <td rowspan="4" style="vertical-align:middle;" class="col-md-1">50</td>
+            <td class="col-md-1">Linux</td>
+            <td class="col-md-2">20</td>
+        </tr>
+        <tr>
+            <td>Windows</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>AIX</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>其他系统</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td rowspan="4" style="vertical-align:middle;">虚拟机</td>
+            <td rowspan="4" style="vertical-align:middle;">40</td>
+            <td>Linux</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>Windows</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>AIX</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td>其他系统</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td colspan="5">应用统计</td>
+        </tr>
+        <tr>
+            <td>中间件</td>
+            <td colspan="2" style="vertical-align:middle;">
+                tomcat9；10套</br>
+                tomcat9：10套</br>
+                tomcat9：10套</br>
+                tomcat9：10套</br>
+            </td>
+            <td style="vertical-align:middle;">数据库</td>
+            <td>
+                mysql-5.7：10套</br>
+                mysql-5.7：10套</br>
+                mysql-5.7：10套</br>
+                mysql-5.7：10套</br>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#system').selectpicker();
+            function print(){
+                $("#print").jqprint();
+            }
+            const pie = echarts.init(document.getElementById("pie"));
+            const option = {
+                title: {
+                    text: '当前为CRM系统,共计157个系统',
+                    textStyle: {
+                        align: 'center',
+                        fontSize: 20,
+                    },
+                    top: '3%',
+                    left: 'center',
+                },
+                grid: {
+                    left: '5%',
+                    top: '8%',
+                    right: '5%',
+                    bottom: '1%',
+                    containLabel: true
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b}:({d}%)"
+                },
+                series: [{
+                    type: 'pie',
+                    data: [{
+                        name: 'CRM系统',
+                        value: 90,
+                    }],
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'center',
+                            fontWeight: 'bold',
+                            color: '#fff',
+                            fontSize: 14
+                        }
+                    },
+                    itemStyle: {
+                        borderWidth: 0,
+                        borderColor: '#FFFFFF',
+                    },
+                    radius: ['0%', '33%'],
+                    clockwise: true,
+                    animation: false
+                }, {
+                    type: 'pie',
+                    data: [{
+                        name: '虚拟机',
+                        value: 40,
+                    },
+                        {
+                            name: '物理机',
+                            value: 50,
+                        }
+                    ],
+                    label: {
+                        position: 'inside',
+                    },
+                    radius: ['33%', '66%'],
+                    itemStyle: {
+                        borderWidth: 1,
+                        borderColor: '#FFFFFF',
+                    },
+                    clockwise: true,
+                    animation: false,
+                }, {
+                    type: 'pie',
+                    data: [{
+                        name: 'linux',
+                        value: 10,
+                    },
+                        {
+                            name: 'windows',
+                            value: 10,
+                        },
+                        {
+                            name: 'aix',
+                            value: 10,
+                        },
+                        {
+                            name: '其他',
+                            value: 10,
+                        },
+                        {
+                            name: 'linux',
+                            value: 20,
+                        },
+                        {
+                            name: 'windows',
+                            value: 10,
+                        },
+                        {
+                            name: 'aix',
+                            value: 10,
+                        },
+                        {
+                            name: '其他',
+                            value: 10,
+                        },
+                    ],
+                    label: {
+                        position: 'inside',
+                    },
+                    radius: ['66%', '100%'],
+                    itemStyle: {
+                        borderWidth: 1,
+                        borderColor: '#FFFFFF',
+                    },
+                    clockwise: true,
+                    animation: false,
+                }],
+            };
+            pie.setOption(option);
+        })
+    </script>
+</body>
+</html>
