@@ -64,5 +64,9 @@ this.element.trigger('change');
 
 >nicescroll 滚动条插件是一个非常强大的基于 jQuery 的滚动条插件，不需要增加额外的css，几乎全浏览器兼容。ie6+，实现只需要一段代码，侵入性非常小，样式可完全自定义，支持触摸事件，可在触摸屏上使用。
 
+官网地址：[http://www.areaaperta.com/nicescroll/](http://www.areaaperta.com/nicescroll/)
+
+GitHub地址：[https://github.com/inuyaksa/jquery.nicescroll](https://github.com/inuyaksa/jquery.nicescroll)
+
 # License
 Released under the [MIT](LICENSE) License.
