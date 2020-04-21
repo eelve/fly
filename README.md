@@ -10,6 +10,10 @@
 
 >bootstrap-select实现的demo。
 
+如果动态加载的话，需要手动调用`$('#select').selectpicker('refresh');`
+
+更多使用方法请转到：[官方例子](https://www.bootstrapselect.cn/examples.html)
+
 ## [iDataV](iDataV/index.html)
 
 >数据可视化模板，主要利用ECharts实现，另外还可以通过第三方服务来快速实现，如阿里云DataV、腾讯云图、百度Sugar等。本模块包含22个案例。
