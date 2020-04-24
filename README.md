@@ -72,5 +72,14 @@ this.element.trigger('change');
 
 GitHub地址：[https://github.com/inuyaksa/jquery.nicescroll](https://github.com/inuyaksa/jquery.nicescroll)
 
+
+## [PDF.js](webpdf/pdfjs/web/viewer.html)
+
+>A general-purpose, web standards-based platform for parsing and rendering PDFs. 
+
+GitHub地址：[https://github.com/mozilla/pdf.js](https://github.com/mozilla/pdf.js)
+
+>PDF.js默认情况下不可以打开本地PDF文件（发布后可以打开服务器文件），也不可以跨域浏览PDF。使用方法可以在viewer.html后面跟上要打开的文件路径即可。 
+
 # License
 Released under the [MIT](LICENSE) License.
