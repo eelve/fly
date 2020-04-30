@@ -79,7 +79,9 @@ GitHub地址：[https://github.com/inuyaksa/jquery.nicescroll](https://github.co
 
 GitHub地址：[https://github.com/mozilla/pdf.js](https://github.com/mozilla/pdf.js)
 
->PDF.js默认情况下不可以打开本地PDF文件（发布后可以打开服务器文件），也不可以跨域浏览PDF。
+>PDF.js默认情况下不可以打开本地PDF文件（发布后可以打开服务器文件）
+
+>PDF.js不可以跨域浏览PDF，特别注意
 
 >使用方法可以在viewer.html后面跟上要打开的文件路径或者PDF文件请求地址即可。 
 
