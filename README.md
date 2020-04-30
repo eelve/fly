@@ -85,5 +85,7 @@ GitHub地址：[https://github.com/mozilla/pdf.js](https://github.com/mozilla/pd
 
 >使用方法可以在viewer.html后面跟上要打开的文件路径或者PDF文件请求地址即可。 
 
+[后端接入案例，使用SpringBoot和thymeleaf，欢迎关注,](https://github.com/eelve/spring-boot-pdf)
+
 # License
 Released under the [MIT](LICENSE) License.
