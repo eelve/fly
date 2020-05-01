@@ -14,12 +14,12 @@
 
 更多使用方法请转到：[官方例子](https://www.bootstrapselect.cn/examples.html)
 
-## [iDataV](iDataV/index.html)
+## [iDataV](./iDataV/index.html)
 
 >数据可视化模板，主要利用ECharts实现，另外还可以通过第三方服务来快速实现，如阿里云DataV、腾讯云图、百度Sugar等。本模块包含22个案例。
  
 
-## [JQuery-SearchableSelect](JQuery-SearchableSelect/index.html)
+## [JQuery-SearchableSelect](./JQuery-SearchableSelect/index.html)
 
 >jquery.searchableSelect实现的下拉搜索组件，修复了change事件：
 
@@ -51,20 +51,20 @@
 this.element.trigger('change');
 ```
 
-## [Bootstrap3Nav](Bootstrap3Nav/index.html)
+## [Bootstrap3Nav](./Bootstrap3Nav/index.html)
 
 >漂亮优雅的Bootstrap侧边栏导航
 
-## [tablesMergeCell](tablesMergeCell/index.html)
+## [tablesMergeCell](./tablesMergeCell/index.html)
 
 >动态表格合并案例
 
 
-## [JQueryPrint](JQueryPrint/index.html)
+## [JQueryPrint](./JQueryPrint/index.html)
 
 >JQueryPrint,web页面打印
 
-## [Jquery-Nicescroll](Jquery-Nicescroll/index.html)
+## [Jquery-Nicescroll](./Jquery-Nicescroll/index.html)
 
 >nicescroll 滚动条插件是一个非常强大的基于 jQuery 的滚动条插件，不需要增加额外的css，几乎全浏览器兼容。ie6+，实现只需要一段代码，侵入性非常小，样式可完全自定义，支持触摸事件，可在触摸屏上使用。
 
@@ -73,7 +73,7 @@ this.element.trigger('change');
 GitHub地址：[https://github.com/inuyaksa/jquery.nicescroll](https://github.com/inuyaksa/jquery.nicescroll)
 
 
-## [PDF.js](webpdf/pdfjs/web/viewer.html)
+## [PDF.js](./webpdf/pdfjs/web/viewer.html)
 
 >A general-purpose, web standards-based platform for parsing and rendering PDFs. 
 
@@ -88,4 +88,4 @@ GitHub地址：[https://github.com/mozilla/pdf.js](https://github.com/mozilla/pd
 [后端接入案例，使用SpringBoot和thymeleaf，欢迎关注,](https://github.com/eelve/spring-boot-pdf)
 
 # License
-Released under the [MIT](LICENSE) License.
+Released under the [MIT](./LICENSE) License.
