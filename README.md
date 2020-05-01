@@ -6,7 +6,7 @@
 
 >A human being,who loves football and music. 
 
-## [bootstrap-select](bootstrap-select/index.html)
+## [./bootstrap-select](bootstrap-select/index.html)
 
 >bootstrap-select实现的demo。
 
