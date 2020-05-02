@@ -45,10 +45,23 @@
     }
 ```
 
-在源代码的基础上添加了绑定事件，触发**change**事件
+> 在源代码的基础上添加了绑定事件，触发**change**事件
 
 ```
 this.element.trigger('change');
+```
+
+> 动态绑定,手动刷新`$('#select').selectpicker('refresh')`
+
+```javascript
+success: function (result) {
+			var data = eval(result);
+			for (let i = 0; i < data.length ; i++) {
+						var system = $('#system');
+						$("#select").append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+					}
+			$('#select').selectpicker('refresh');			
+		}
 ```
 
 ## [Bootstrap3Nav](./Bootstrap3Nav/index.html)
