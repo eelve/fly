@@ -96,7 +96,9 @@ GitHub地址：[https://github.com/mozilla/pdf.js](https://github.com/mozilla/pd
 
 >PDF.js不可以跨域浏览PDF，特别注意
 
->使用方法可以在viewer.html后面跟上要打开的文件路径或者PDF文件请求地址即可。 
+>使用方法可以在viewer.html后面跟上要打开的文件路径或者PDF文件请求地址即可。
+
+>尽量使用静态页面，可以执行js，但是不能动态生成dom树 
 
 [后端接入案例，使用SpringBoot和thymeleaf，欢迎关注,](https://github.com/eelve/spring-boot-pdf)
 
