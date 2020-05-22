@@ -6,6 +6,33 @@
 
 >A human being,who loves football and music. 
 
+## [bootstrap-switch](./bootstrap-switch/index.html)
+
+>bootstrap-switch实现的滑块开关。
+
+- Include the dependencies: jQuery, Bootstrap and Bootstrap Switch CSS + Javascript:
+
+```html
+<link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap-switch.css" rel="stylesheet">
+<script src="jquery.js"></script>
+<script src="bootstrap-switch.js"></script>
+```
+
+- add your checkbox:
+
+```html
+<input type="checkbox" name="my-checkbox" checked>
+```
+
+- Initialize Bootstrap Switch on it:
+
+```html
+$("[name='my-checkbox']").bootstrapSwitch();
+```
+
+更多使用方法请转到：[官方](https://github.com/Bttstrp/bootstrap-switch)
+
 ## [bootstrap-select](./bootstrap-select/index.html)
 
 >bootstrap-select实现的demo。
