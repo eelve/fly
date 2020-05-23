@@ -41,6 +41,13 @@ $("[name='my-checkbox']").bootstrapSwitch();
 
 更多使用方法请转到：[官方例子](https://www.bootstrapselect.cn/examples.html)
 
+## [x-editable](./x-editable/index.html)
+
+>In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery 
+
+[官方仓库](https://github.com/vitalets/x-editable) 更多使用方法请转到：[官方例子](http://vitalets.github.io/x-editable/demo-bs3.html)
+
+
 ## [iDataV](./iDataV/index.html)
 
 >数据可视化模板，主要利用ECharts实现，另外还可以通过第三方服务来快速实现，如阿里云DataV、腾讯云图、百度Sugar等。本模块包含22个案例。
